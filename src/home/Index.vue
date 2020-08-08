@@ -1,42 +1,75 @@
 <template>
-  <KView class="page home js_show">
-       <KView class="page__hd">
-            <h1 class="page__title">
-                Kbone-UI
-            </h1>
-            <p class="page__desc">KboneUI 是一套同微信原生视觉体验一致的基础样式库，同时适用于 Web 端和小程序。</p>
-        </KView>
-        <KView class="page__bd page__bd_spacing">
-            <KButtonArea>
-              <KButton type="primary" >页面主要操作</KButton>
-              <KButton type="primary" open-type="getUserInfo"
-                @getuserinfo="getUserInfo" > getUserInfo </KButton>
-              <KButton type="primary" :loading="true">Loading</KButton>
-              <KButton type="primary" :disabled="true">禁止点击</KButton>
-              <KButton >页面次要操作</KButton>
-              <KButton type="warn">警告类操作</KButton>
-              <KButton type="warn" :loading="true">警告类操作</KButton>
-              <KButton type="warn" :disabled="true">警告类操作</KButton>
-          </KButtonArea>
-          <KButtonArea direction="horizontal">
-              <KButton size="mini" type="primary">btn</KButton>
-              <KButton size="mini" >btn</KButton>
-              <KButton size="mini" type="warn">btn</KButton>
-          </KButtonArea>
-        </KView>
+  <KView class="page form js_show">
+    <KView class="page__hd">
+      <h1 class="page__title">Form</h1>
+      <p class="page__desc">form 表单内容</p>
+    </KView>
+    <KCells
+      checkbox
+      title="Checkbox">
+      <KCheckboxGroup
+        v-model="checkboxGrpValues"
+        @change="handleChange">
+        <KCheckbox value="零度的田">零度的田</KCheckbox>
+        <KCheckbox value="小程序开发">小程序开发</KCheckbox>
+      </KCheckboxGroup>
+    </KCells>
+    <KCells title="Switch">
+      <KSwitch
+        v-model="switchItem"
+        label="Switch文本" />
+    </KCells>
+
+    <KCells title="健康信息登记表">
+      <KInput
+        v-model="inputUserName"
+        label="姓名"
+        placeholder="填写本人姓名"
+        clearable
+        @change="inputChange"/>
+      <KRadioGroup
+        v-model="genderValue"
+        @change="genderChange">
+        <KRadio :value="male">男</KRadio>
+        <KRadio :value="female">女</KRadio>
+      </KRadioGroup>
+      <KInput
+        v-model="inputNickName"
+        label="昵称"
+        placeholder="填写本人微信号的昵称"
+        clearable
+        @change="inputChange"/>
+    </KCells>
+
+
   </KView>
 </template>
 
 <script>
-import Vue from 'vue'
-
-
-export default Vue.extend({
-  name: 'Button',
+export default {
+  data() {
+    return {
+      singleCheckbox: false,
+      checkboxGrpValues: [],
+      inputCardValue: '',
+      inputNickName: '',
+      switchItem: false,
+      radioValue: 1
+    }
+  },
   methods: {
-    getUserInfo(e) {
-      console.log(e)
+    handleChange() {
+      console.log(this.checkboxGrpValues)
+    },
+    singleCheckboxHandler() {
+      console.log(this.singleCheckbox)
+    },
+    raidoChange() {
+      console.log(this.radioValue)
+    },
+    inputChange() {
+      console.log(this.inputValue)
     }
   }
-})
+}
 </script>
